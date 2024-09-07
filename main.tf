@@ -1,7 +1,11 @@
-resource "aws_sns_topic" "test_sns" {
-  name = "sns-test"
-
+locals {
   tags = {
-    Name = var.product
+    Product = var.product
   }
+}
+
+module "sns" {
+  source = "./sns"
+
+  tags = local.tags
 }

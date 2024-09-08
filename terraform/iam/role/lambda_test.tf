@@ -17,31 +17,9 @@ resource "aws_iam_role" "lambda_test_role" {
   tags               = var.tags
 }
 
-data "aws_iam_policy_document" "lambda_test" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
-    ]
-
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_policy" "lambda_test" {
-  name = "lambda-test-permissions"
-
-  policy = data.aws_iam_policy_document.lambda_test.json
-}
-
 resource "aws_iam_role_policy_attachment" "lambda_test" {
-  count = 1
-
   role       = aws_iam_role.lambda_test_role.name
-  policy_arn = aws_iam_policy.lambda_test.arn
+  policy_arn = module.policy.lambda_test_service.arn
 }
 
 output "lambda_test_service" {

@@ -17,3 +17,7 @@ resource "aws_lambda_function" "lambda_test" {
   tags = var.tags
 
 }
+
+output "lambda_test" {
+  value = aws_lambda_function.lambda_test
+}

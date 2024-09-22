@@ -22,3 +22,9 @@ module "sns" {
 
   tags = local.tags
 }
+
+module "apigateway" {
+  source = "./apigateway"
+
+  lambda_module = module.lambda.data
+}

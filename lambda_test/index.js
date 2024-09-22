@@ -1,7 +1,16 @@
-const handler = async () => {
-  return "Hello World";
-}
+exports.handler = async (event) => {
+  // Your Lambda function logic here
 
-module.exports = {
-  handler
-}
+  const response = {
+    statusCode: 200,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+    message: "Hello from Lambda!"
+    // Add more data as needed
+  })
+};
+
+return response;
+};
